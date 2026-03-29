@@ -1,0 +1,16 @@
+{
+  "scriptFile" : "../FunctionAppAzure1-1.0-SNAPSHOT.jar",
+  "entryPoint" : "com.function.UsersFunction.crearUsuario",
+  "bindings" : [ {
+    "type" : "httpTrigger",
+    "direction" : "in",
+    "name" : "req",
+    "route" : "users",
+    "methods" : [ "POST" ],
+    "authLevel" : "ANONYMOUS"
+  }, {
+    "type" : "http",
+    "direction" : "out",
+    "name" : "$return"
+  } ]
+}

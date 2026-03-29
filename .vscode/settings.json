@@ -1,0 +1,9 @@
+{
+    "azureFunctions.javaBuildTool": "maven",
+    "azureFunctions.deploySubpath": "target/azure-functions/FunctionAppAzure1-1774231016700",
+    "azureFunctions.projectLanguage": "Java",
+    "azureFunctions.projectRuntime": "~4",
+    "debug.internalConsoleOptions": "neverOpen",
+    "azureFunctions.preDeployTask": "package (functions)",
+    "java.configuration.updateBuildConfiguration": "interactive"
+}
