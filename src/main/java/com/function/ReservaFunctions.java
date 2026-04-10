@@ -24,12 +24,8 @@ public class ReservaFunctions {
 
     @FunctionName("CrearReserva")
     public HttpResponseMessage crearReserva(
-            @HttpTrigger(
-                    name = "req",
-                    methods = {HttpMethod.POST},
-                    route = "reservas",
-                    authLevel = AuthorizationLevel.ANONYMOUS)
-            HttpRequestMessage<Optional<ReservaLibroDTO>> request,
+            @HttpTrigger(name = "req", methods = {
+                    HttpMethod.POST }, route = "reservas", authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<ReservaLibroDTO>> request,
             final ExecutionContext context) {
 
         context.getLogger().info("Iniciando creación de reserva...");
@@ -46,7 +42,7 @@ public class ReservaFunctions {
         String sql = "INSERT INTO RESERVAS (user_id, libro_id, fecha_reserva, fecha_devolucion, status) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection connection = MySqlConfig.getConnection();
-             PreparedStatement stmt = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+                PreparedStatement stmt = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, nuevaReserva.getUserId());
             stmt.setString(2, nuevaReserva.getLibroId());
@@ -77,12 +73,8 @@ public class ReservaFunctions {
 
     @FunctionName("ObtenerTodasLasReservas")
     public HttpResponseMessage obtenerTodasLasReservas(
-            @HttpTrigger(
-                    name = "req",
-                    methods = {HttpMethod.GET},
-                    route = "reservas",
-                    authLevel = AuthorizationLevel.ANONYMOUS)
-            HttpRequestMessage<Optional<String>> request,
+            @HttpTrigger(name = "req", methods = {
+                    HttpMethod.GET }, route = "reservas", authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<String>> request,
             final ExecutionContext context) {
 
         context.getLogger().info("Obteniendo todas las reservas desde MySQL...");
@@ -90,8 +82,8 @@ public class ReservaFunctions {
         String sql = "SELECT id, user_id, libro_id, fecha_reserva, fecha_devolucion, status FROM RESERVAS";
 
         try (Connection connection = MySqlConfig.getConnection();
-             PreparedStatement stmt = connection.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+                PreparedStatement stmt = connection.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
                 ReservaLibroDTO dto = ReservaLibroDTO.builder()
@@ -120,12 +112,8 @@ public class ReservaFunctions {
 
     @FunctionName("ObtenerReservaPorId")
     public HttpResponseMessage obtenerReservaPorId(
-            @HttpTrigger(
-                    name = "req",
-                    methods = {HttpMethod.GET},
-                    route = "reservas/{id}",
-                    authLevel = AuthorizationLevel.ANONYMOUS)
-            HttpRequestMessage<Optional<String>> request,
+            @HttpTrigger(name = "req", methods = {
+                    HttpMethod.GET }, route = "reservas/{id}", authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<String>> request,
             @BindingName("id") String id,
             final ExecutionContext context) {
 
@@ -133,7 +121,7 @@ public class ReservaFunctions {
         String sql = "SELECT id, user_id, libro_id, fecha_reserva, fecha_devolucion, status FROM RESERVAS WHERE id = ?";
 
         try (Connection connection = MySqlConfig.getConnection();
-             PreparedStatement stmt = connection.prepareStatement(sql)) {
+                PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setString(1, id);
 
@@ -168,12 +156,8 @@ public class ReservaFunctions {
 
     @FunctionName("ActualizarReserva")
     public HttpResponseMessage actualizarReserva(
-            @HttpTrigger(
-                    name = "req",
-                    methods = {HttpMethod.PUT},
-                    route = "reservas/{id}",
-                    authLevel = AuthorizationLevel.ANONYMOUS)
-            HttpRequestMessage<Optional<ReservaLibroDTO>> request,
+            @HttpTrigger(name = "req", methods = {
+                    HttpMethod.PUT }, route = "reservas/{id}", authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<ReservaLibroDTO>> request,
             @BindingName("id") String id,
             final ExecutionContext context) {
 
@@ -191,7 +175,7 @@ public class ReservaFunctions {
         String sql = "UPDATE RESERVAS SET user_id = ?, libro_id = ?, fecha_reserva = ?, fecha_devolucion = ?, status = ? WHERE id = ?";
 
         try (Connection connection = MySqlConfig.getConnection();
-             PreparedStatement stmt = connection.prepareStatement(sql)) {
+                PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setString(1, reservaAActualizar.getUserId());
             stmt.setString(2, reservaAActualizar.getLibroId());
@@ -221,12 +205,8 @@ public class ReservaFunctions {
 
     @FunctionName("EliminarReserva")
     public HttpResponseMessage eliminarReserva(
-            @HttpTrigger(
-                    name = "req",
-                    methods = {HttpMethod.DELETE},
-                    route = "reservas/{id}",
-                    authLevel = AuthorizationLevel.ANONYMOUS)
-            HttpRequestMessage<Optional<String>> request,
+            @HttpTrigger(name = "req", methods = {
+                    HttpMethod.DELETE }, route = "reservas/{id}", authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<String>> request,
             @BindingName("id") String id,
             final ExecutionContext context) {
 
@@ -235,7 +215,7 @@ public class ReservaFunctions {
         String sql = "DELETE FROM RESERVAS WHERE id = ?";
 
         try (Connection connection = MySqlConfig.getConnection();
-             PreparedStatement stmt = connection.prepareStatement(sql)) {
+                PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setString(1, id);
             int filasAfectadas = stmt.executeUpdate();

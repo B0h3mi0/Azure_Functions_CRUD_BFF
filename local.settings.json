@@ -3,7 +3,7 @@
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "java",
-    "DB_URL": "jdbc:mysql://3.232.35.129:3306/library_db",
+    "DB_URL": "jdbc:mysql://54.146.93.25:3306/library_db",
     "DB_USER": "myuser",
     "DB_PASS": "mypassword"
   }

@@ -1,7 +1,10 @@
+com\graphql\GraphQLProvider.class
 com\dto\ReservaLibroDTO.class
 com\dto\UserDTO.class
 com\function\UsersFunction.class
+com\graphql\GraphQLRequest.class
 com\dto\ReservaLibroDTO$ReservaLibroDTOBuilder.class
 com\config\MySqlConfig.class
+com\function\GraphQLReservaFunctions.class
 com\function\ReservaFunctions.class
 com\dto\UserDTO$UserDTOBuilder.class

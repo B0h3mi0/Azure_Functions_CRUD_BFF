@@ -1,0 +1,16 @@
+{
+  "scriptFile" : "../FunctionAppAzure1-1.0-SNAPSHOT.jar",
+  "entryPoint" : "com.function.GraphQLReservaFunctions.graphQLReservaGet",
+  "bindings" : [ {
+    "type" : "httpTrigger",
+    "direction" : "in",
+    "name" : "req",
+    "route" : "graphql/reservas",
+    "methods" : [ "GET" ],
+    "authLevel" : "ANONYMOUS"
+  }, {
+    "type" : "http",
+    "direction" : "out",
+    "name" : "$return"
+  } ]
+}
