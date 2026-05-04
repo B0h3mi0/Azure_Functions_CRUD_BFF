@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ReservaLibroDTO {
+public class ReservaDTO {
     private String id;
     private String userId;
     private String libroId;

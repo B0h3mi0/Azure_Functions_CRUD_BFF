@@ -1,12 +1,12 @@
 {
   "scriptFile" : "../FunctionAppAzure1-1.0-SNAPSHOT.jar",
-  "entryPoint" : "com.function.ReservaFunctions.obtenerReservaPorId",
+  "entryPoint" : "com.function.GraphQLReservaFunctions.graphQLActualizarEstadoReserva",
   "bindings" : [ {
     "type" : "httpTrigger",
     "direction" : "in",
     "name" : "req",
-    "route" : "reservas/{id}",
-    "methods" : [ "GET" ],
+    "route" : "graphql/reservas/actualizar-estado",
+    "methods" : [ "POST" ],
     "authLevel" : "ANONYMOUS"
   }, {
     "type" : "http",

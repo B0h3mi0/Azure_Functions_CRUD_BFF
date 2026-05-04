@@ -36,21 +36,19 @@ public class UsersFunction {
         UserDTO nuevoUsuario = request.getBody().get();
         context.getLogger().info("Creando usuario con email: " + nuevoUsuario.getEmail());
 
-        String sql = "INSERT INTO USUARIOS (name, email) VALUES (?, ?)";
+        String sql = "INSERT INTO USUARIOS (id, name, email) VALUES (?, ?, ?)";
 
         try (Connection connection = MySqlConfig.getConnection();
-             PreparedStatement stmt = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
 
-            stmt.setString(1, nuevoUsuario.getName());
-            stmt.setString(2, nuevoUsuario.getEmail());
+            String newId = nuevoUsuario.getId() != null ? nuevoUsuario.getId() : java.util.UUID.randomUUID().toString();
+            nuevoUsuario.setId(newId);
+
+            stmt.setString(1, newId);
+            stmt.setString(2, nuevoUsuario.getName());
+            stmt.setString(3, nuevoUsuario.getEmail());
 
             stmt.executeUpdate();
-
-            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    nuevoUsuario.setId(String.valueOf(generatedKeys.getInt(1)));
-                }
-            }
 
         } catch (SQLException e) {
             context.getLogger().severe("Fallo en la base de datos: " + e.getMessage());

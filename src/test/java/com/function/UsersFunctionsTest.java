@@ -77,12 +77,8 @@ public class UsersFunctionsTest {
         doReturn(Optional.of(usuarioEntrada)).when(requestPostPut).getBody();
 
         mockedMySqlConfig.when(MySqlConfig::getConnection).thenReturn(connection);
-        when(connection.prepareStatement(anyString(), anyInt())).thenReturn(preparedStatement);
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
         when(preparedStatement.executeUpdate()).thenReturn(1);
-        
-        when(preparedStatement.getGeneratedKeys()).thenReturn(resultSet);
-        when(resultSet.next()).thenReturn(true);
-        when(resultSet.getInt(1)).thenReturn(100);
 
         doReturn(HttpStatus.CREATED).when(response).getStatus();
 
